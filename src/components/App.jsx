@@ -21,12 +21,16 @@ const App = () => {
 
     const handleLogin = () => {
         setIsAdmin(true);
+    };
+
+    const logOut = () => {
+        setIsAdmin(false);
     }
     return (
         <div>
         <Grid container direction="column">
             <Grid item container>
-                { isAdmin ? <AdminHeader add={add} addChange={handleClick} /> : <Header page={page} pageChange={pageHandler}/> }
+                { isAdmin ? <AdminHeader logOut={logOut} add={add} addChange={handleClick} /> : <Header page={page} pageChange={pageHandler}/> }
             </Grid>
             <Grid item container style={{ marginTop: 150 }} xs={12}  lg={12} justify="center" alignItems="center">
                 {(!isAdmin && page) && <Login logInClick={handleLogin} />}

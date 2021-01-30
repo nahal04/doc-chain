@@ -15,7 +15,7 @@ const AdminHeader = (props) => {
                 <Typography variant="h5" style={{ fontWeight:"200" }}>doc-<span style={{ fontWeight: "500" }}>chain</span></Typography>
                 </Grid>
                 <Grid item container justify="flex-end">
-                <Button variant="outlined" style={{ marginRight: 10 }} color="inherit">Sign out</Button>
+                <Button variant="outlined" style={{ marginRight: 10 }} color="inherit" onClick={props.logOut}>Sign out</Button>
                 <Button variant="contained" onClick={props.addChange}> { props.add ? "List" : "Add" }</Button>
                 </Grid>
                     
