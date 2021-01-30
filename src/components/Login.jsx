@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
@@ -10,6 +10,7 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import axios from 'axios';
 
 function Copyright() {
   return (
@@ -39,8 +40,27 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignIn() {
+export default function SignIn(props) {
   const classes = useStyles();
+  const [user, setUser] = useState({
+      userName: "",
+      email: "",
+      password: ""
+  });
+  const handleChange = (event) => {
+    setUser(prev => (
+        {
+            ...prev,
+            [event.target.name]: event.target.value
+        }
+    ));
+  }
+  const logInClick = (e) => {
+      e.preventDefault();
+      axios.post("http://localhost:5000/", { user }).then(res => {
+          console.log(res.data);
+      })
+  }
 
   return (
     <Container component="main" maxWidth="xs">
@@ -52,6 +72,17 @@ export default function SignIn() {
           Admin sign in
         </Typography>
         <form className={classes.form} noValidate>
+        <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            id="userName"
+            label="User Name"
+            name="userName"
+            autoFocus
+            onChange={handleChange}
+          />
           <TextField
             variant="outlined"
             margin="normal"
@@ -60,8 +91,7 @@ export default function SignIn() {
             id="email"
             label="Email Address"
             name="email"
-            autoComplete="email"
-            autoFocus
+            onChange={handleChange}
           />
           <TextField
             variant="outlined"
@@ -73,6 +103,7 @@ export default function SignIn() {
             type="password"
             id="password"
             autoComplete="current-password"
+            onChange={handleChange}
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
@@ -84,6 +115,7 @@ export default function SignIn() {
             variant="contained"
             color="primary"
             className={classes.submit}
+            onClick={props.logInClick}
           >
             Sign In
           </Button>

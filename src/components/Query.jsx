@@ -1,6 +1,6 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
-import { Box, Typography } from '@material-ui/core';
+import { Box, Button, Typography } from '@material-ui/core';
 
 const Query = () => {
     return (
@@ -11,6 +11,11 @@ const Query = () => {
         </Box>
         <Box mt={5}>
         <TextField fullWidth variant="outlined" label="Document ID" />
+        </Box>
+        <Box mt={5}>
+        <Button variant="contained" color="primary" fullWidth>
+            Find
+        </Button>
         </Box>
             
         </div>
